@@ -1,10 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
+  function getHello() {
+    const great = document.getElementById("greet");
+    fetch("http://localhost:4000/api/hello")
+      .then((res) => res.json())
+      .then((data) => (great.innerHTML = JSON.stringify(data)));
+  }
+  useEffect(getHello);
   return (
     <div className="App">
       <div>
@@ -21,6 +27,9 @@ function App() {
           count is {count}
         </button>
         <p>
+          api called : <code id="greet"></code>
+        </p>
+        <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
@@ -28,7 +37,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
