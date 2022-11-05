@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
   function getHello() {
     const great = document.getElementById("greet");
-    fetch("http://localhost:4000/api/hello")
+    fetch(import.meta.env.VITE_API_SERVER + "/api/hello")
       .then((res) => res.json())
       .then((data) => (great.innerHTML = JSON.stringify(data)));
   }
